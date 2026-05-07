@@ -167,25 +167,25 @@ try:
     # =========================
     # ページ移動
     # =========================
-    driver.find_element(By.XPATH, "//input[@name='__send']").click()
-    
-    # ページ遷移待機
+
+    # 2ページ目待機（送信ボタン出現）
     WebDriverWait(driver, 10).until(
-    EC.presence_of_element_located((By.ID, ".__send"))
-)
+        EC.presence_of_element_located((By.NAME, "__commit"))
+    )
 
-# =========================
-# 2ページ目
-# =========================
+    # 送信ボタン押下
+    send_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.NAME, "__commit"))
+    )
 
-    # =========================
-    # 送信
-    # =========================
-    driver.find_element(By.ID, ".__commit").click()
+    send_button.click()
+
+    # 完了待ち（必要なら）
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.XPATH, "//*[contains(text(),'送信')]"))
+    )
 
     print("送信完了")
 
-    time.sleep(3)
-
-finally:
-    driver.quit()
+    finally:
+        driver.quit()
