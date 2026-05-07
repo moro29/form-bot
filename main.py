@@ -13,7 +13,7 @@ import os
 
 
 # =========================
-# Secrets
+# GitHub Secrets
 # =========================
 EMPLOYEE = os.getenv("EMPLOYEE_NUMBER")
 LAST_NAME = os.getenv("FORM_LAST_NAME")
@@ -23,16 +23,15 @@ OFFICE = os.getenv("OFFICE")
 
 
 # =========================
-# 時刻
+# 現在時刻
 # =========================
 now = datetime.now(ZoneInfo("Asia/Tokyo"))
 today = now.date()
 hour = now.hour
-minute = now.minute
 
 
 # =========================
-# 実行期間
+# 実行期間制限
 # =========================
 start_date = date(2026, 5, 7)
 end_date = date(2026, 5, 22)
@@ -43,19 +42,16 @@ if not (start_date <= today <= end_date):
 
 
 # =========================
-# 時間帯判定
+# 時間帯判定（ラジオ）
 # =========================
 radio_id = None
 
-if hour == 10 and minute <= 20:
+if hour == 10:
     radio_id = "tmp_0"
-
-elif hour == 13 and minute <= 20:
+elif hour == 13:
     radio_id = "tmp_1"
-
-elif hour == 16 and minute <= 20:
+elif hour == 16:
     radio_id = "tmp_2"
-
 else:
     print("対象時間外")
     exit()
@@ -66,9 +62,12 @@ if radio_id is None:
 
 
 # =========================
-# 人間っぽい待機
+# ★ここが重要：2〜18分ランダム遅延
 # =========================
-time.sleep(random.randint(120, 1080))
+delay_sec = random.randint(2 * 60, 18 * 60)
+
+print(f"送信まで待機: {delay_sec}秒")
+time.sleep(delay_sec)
 
 
 # =========================
@@ -148,10 +147,8 @@ try:
 
 
     # =========================
-    # 完了待機
+    # 完了
     # =========================
-    time.sleep(3)
-
     print("送信完了")
 
 
