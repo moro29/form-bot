@@ -163,7 +163,7 @@ try:
     # =========================
     # ページ移動
     # =========================
-    driver.find_element(By.ID, ".__send").click()
+    driver.find_element(By.XPATH, "//input[@name='__send']").click()
     
     # ページ遷移待機
     WebDriverWait(driver, 10).until(
