@@ -146,8 +146,8 @@ try:
     # ラジオボタン
     # =========================
     if radio_id is None:
-    print("対象時間外")
-    exit()
+       print("対象外")
+       exit()
     
     driver.find_element(By.ID, radio_id).click()
 
