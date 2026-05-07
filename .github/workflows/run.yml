@@ -14,25 +14,44 @@ on:
 
   workflow_dispatch:
 
+
 jobs:
   run:
     runs-on: ubuntu-latest
-    
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
+
+      # =========================
+      # リポジトリ取得
+      # =========================
       - uses: actions/checkout@v4
 
+
+      # =========================
+      # Pythonセットアップ
+      # =========================
       - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
+
+      # =========================
+      # Chromeセットアップ
+      # =========================
       - uses: browser-actions/setup-chrome@v1
 
-      - run: pip install -r requirements.txt
 
-      - name: Run Script
+      # =========================
+      # 依存関係インストール
+      # =========================
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+
+      # =========================
+      # 実行
+      # =========================
+      - name: Run Form Bot
         env:
           EMPLOYEE_NUMBER: ${{ secrets.EMPLOYEE_NUMBER }}
           FORM_LAST_NAME: ${{ secrets.FORM_LAST_NAME }}
