@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 from datetime import datetime, date
 from zoneinfo import ZoneInfo
@@ -162,9 +164,11 @@ try:
     # ページ移動
     # =========================
     driver.find_element(By.ID, ".__send").click()
-
+    
     # ページ遷移待機
-    time.sleep(2)
+    WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.ID, ".__send"))
+)
 
 # =========================
 # 2ページ目
