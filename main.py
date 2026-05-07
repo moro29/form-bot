@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 
-from datetime import datetime
+from datetime import datetime, date
 from zoneinfo import ZoneInfo
 
 import random
@@ -34,24 +34,26 @@ minute = now.minute
 # =========================
 start_date = date(2026, 5, 7)
 end_date = date(2026, 5, 22)
-
+if not (start_date <= today <= end_date):
+    print("対象期間外")
+    exit()
 # =========================
 # 時間帯判定
 # =========================
 radio_id = None
 dropdown_text = None
 
-# 10:00〜10:15
+# 10:00〜10:20
 if hour == 10 and minute <= 20:
     radio_id = "tmp_0"
     dropdown_text = "午前"
 
-# 13:00〜13:15
+# 13:00〜13:20
 elif hour == 13 and minute <= 20:
     radio_id = "tmp_1"
     dropdown_text = "昼"
 
-# 16:00〜16:15
+# 16:00〜16:20
 elif hour == 16 and minute <= 20:
     radio_id = "tmp_2"
     dropdown_text = "夕方"
@@ -152,7 +154,7 @@ try:
         driver.find_element(By.ID, "e_10667")
     )
 
-    dropdown.select_by_visible_text(東海BL)
+    dropdown.select_by_visible_text("東海BL")
 
     time.sleep(random.uniform(5, 15))
 
