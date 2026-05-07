@@ -1,0 +1,40 @@
+name: Form Bot
+
+on:
+  schedule:
+
+    # 平日10:00 JST
+    - cron: '0 1 * * 1-5'
+
+    # 平日13:00 JST
+    - cron: '0 4 * * 1-5'
+
+    # 平日16:00 JST
+    - cron: '0 7 * * 1-5'
+
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - uses: browser-actions/setup-chrome@v1
+
+      - run: pip install -r requirements.txt
+
+      - name: Run Script
+        env:
+          EMPLOYEE_NUMBER: ${{ secrets.EMPLOYEE_NUMBER }}
+          FORM_LAST_NAME: ${{ secrets.FORM_EMAIL }}
+          FORM_FIRST_NAME: ${{ secrets.FORM_NAME }}
+          FORM_EMAIL: ${{ secrets.FORM_EMAIL }}
+          OFFICE: ${{ secrets.FORM_EMAIL }}
+
+        run: python main.py
