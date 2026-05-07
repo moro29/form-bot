@@ -145,6 +145,10 @@ try:
     # =========================
     # ラジオボタン
     # =========================
+    if radio_id is None:
+    print("対象時間外")
+    exit()
+    
     driver.find_element(By.ID, radio_id).click()
 
     time.sleep(random.uniform(5, 10))
