@@ -36,7 +36,7 @@ jobs:
         env:
           EMPLOYEE_NUMBER: ${{ secrets.EMPLOYEE_NUMBER }}
           FORM_LAST_NAME: ${{ secrets.FORM_LAST_NAME }}
-          FORM_FIRST_NAME: ${{ secrets.FORM_FIRST_NAME}}
+          FORM_FIRST_NAME: ${{ secrets.FORM_FIRST_NAME }}
           FORM_EMAIL: ${{ secrets.FORM_EMAIL }}
           OFFICE: ${{ secrets.OFFICE }}
 
