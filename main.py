@@ -153,9 +153,9 @@ try:
     print("送信完了")
 
 
-    except Exception as e:
+except Exception as e:
         print("エラー:", e)
         raise
 
-    finally:
+finally:
         driver.quit()
