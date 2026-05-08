@@ -131,9 +131,14 @@ try:
     # =========================
     # 2ページ目待機
     # =========================
-    wait.until(
-        EC.presence_of_element_located((By.NAME, "__commit"))
-    )
+commit_btn = wait.until(
+    EC.element_to_be_clickable((By.NAME, "__commit"))
+)
+
+driver.execute_script(
+    "arguments[0].click();",
+    commit_btn
+)
 
 
     # =========================
