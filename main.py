@@ -121,45 +121,41 @@ try:
     # =========================
     # 次へボタン
     # =========================
-    wait.until(
+    next_btn = wait.until(
         EC.element_to_be_clickable(
             (By.XPATH, "//input[@name='__send' and contains(@value,'次へ')]")
         )
-    ).click()
+    )
+
+    driver.execute_script(
+        "arguments[0].click();",
+        next_btn
+    )
 
 
     # =========================
     # 2ページ目待機
     # =========================
-commit_btn = wait.until(
-    EC.element_to_be_clickable((By.NAME, "__commit"))
-)
+    commit_btn = wait.until(
+        EC.element_to_be_clickable((By.NAME, "__commit"))
+    )
 
-driver.execute_script(
-    "arguments[0].click();",
-    commit_btn
-)
-
-
-    # =========================
-    # 送信ボタン
-    # =========================
     time.sleep(random.uniform(2, 5))
 
-    wait.until(
-        EC.element_to_be_clickable((By.NAME, "__commit"))
-    ).click()
-
-
     # =========================
-    # 完了
+    # 送信
     # =========================
+    driver.execute_script(
+        "arguments[0].click();",
+        commit_btn
+    )
+
     print("送信完了")
 
 
-except Exception as e:
-    print("エラー:", e)
-    raise
+    except Exception as e:
+        print("エラー:", e)
+        raise
 
-finally:
-    driver.quit()
+    finally:
+        driver.quit()
